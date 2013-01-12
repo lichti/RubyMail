@@ -1,0 +1,40 @@
+RubyMail
+
+Esta classe tem como objetivo enviar emails com anexos, 
+textos formatados em html e textos planos, através através
+do protocolo SMTP. 
+
+Esta classe não esta otimizada, uma das coisas a fazer são
+os controles de erros. Mas esta funcional
+
+Espero receber opiniões ou sugestões de mudança para que eu
+possa disponibilizar aqui para outras pessoas também possam
+utilizar
+
+Um dos itens que vou adicionar em uma TO-DO-LIST é suporte a
+SSL/TLS, para que possamos utilizar o gmail também.
+
+Fiz essas classes com fins de estudos, com o objetivo que ela
+funcionasse!
+
+Referencia a classe net/smtp => http://www.ruby-doc.org/stdlib/libdoc/net/smtp/rdoc/index.html
+
+Usando o RubyMail
+
+   mail = Email.new('mail.domain.eti.br',25)
+   mail.hello_domain   = 'domain.eti.br'
+   mail.auth_login     = 'guest@domain.eti.br'
+   mail.auth_passw     = '*******
+   mail.auth_type      = :plain
+   mail.from           = {:nome => "\"RubyMail\"", :email => "RubyMail@guest@domain.eti.br"}
+   mail.to             = "colega@gmail.com"
+   mail.subject        = "Testando o RubyMail- #{Time.now.day}/#{Time.now.month}/#{Time.now.year}"
+   mail.text           = "Esse e-mail é um teste do ruby mail em HTML mas seu cliente de e-mail não deve suportar"
+   mail.html           = "<h1>Teste do RubyMail</h1>"
+   mail.attach_file("/home/guest/bola.jpg","bola.jpg")
+   begin
+     mail.send()
+   rescue
+     puts "error on sending: #{$!}"
+   end
+
